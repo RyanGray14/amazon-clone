@@ -90,6 +90,7 @@ document.querySelectorAll('.adding').forEach((button) => {
 		cart.forEach((product) => {
 			cartQuantity += product.quantity;
 		});
+
 		document.querySelector('.cart-quantity').innerHTML = cartQuantity;
 		console.clear();
 		console.log(cart);
