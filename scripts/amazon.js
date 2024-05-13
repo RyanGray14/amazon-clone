@@ -1,7 +1,8 @@
-import {cart} from '../data/cart.js';
+import {cart, cartUpdate} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHTML = '';
+const msgTimeouts = [];
 
 products.forEach((item) => {
     productsHTML += `
@@ -56,10 +57,7 @@ products.forEach((item) => {
           </button>
         </div>`;
 }); 
-
 document.querySelector('.js-products').innerHTML = productsHTML;
-
-const msgTimeouts = [];
 
 function addedMessage(pId){
   	document.querySelector(`.added-${pId}`).classList.add('added-msg');
@@ -74,31 +72,12 @@ function addedMessage(pId){
 	});
 }
 
-function cartUpdate(){
-	let cartQuantity = 0;
-	cart.forEach((product) => {
-		cartQuantity += product.quantity;
-	});
-	document.querySelector('.cart-quantity').innerHTML = cartQuantity;
-}
-
 document.querySelectorAll('.adding').forEach((button) => {
 	button.addEventListener('click', () => {
-		const pId = button.dataset.productId;
-    	const quan = +(document.querySelector(`.chosen-quantity-${pId}`).value);
-		const toFind = cart.find(prop => prop.id === pId);
-		if(toFind)
-			toFind.quantity += quan;
-		else {
-			cart.push({
-				id: pId,
-				name: button.dataset.productName,
-				quantity: quan
-			});
-		}
-
-		addedMessage(pId);
-		cartUpdate();
+		const buttonElement = button.dataset;
+    	
+		addedMessage(buttonElement.productId);
+		cartUpdate(buttonElement);		
 
 		console.clear();
 		console.log(cart);
