@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
 
 let productsHTML = '';
 
@@ -59,6 +61,27 @@ document.querySelector('.js-products').innerHTML = productsHTML;
 
 const msgTimeouts = [];
 
+function addedMessage(pId){
+  	document.querySelector(`.added-${pId}`).classList.add('added-msg');
+	setTimeout(() => {
+		const prevTout = msgTimeouts[pId];
+		if (prevTout) clearTimeout(prevTout);
+				
+		const timeoutId = setTimeout(() => {
+			document.querySelector(`.added-${pId}`).classList.remove('added-msg');
+		}, 2000);	  
+		msgTimeouts[pId] = timeoutId;
+	});
+}
+
+function cartUpdate(){
+	let cartQuantity = 0;
+	cart.forEach((product) => {
+		cartQuantity += product.quantity;
+	});
+	document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+}
+
 document.querySelectorAll('.adding').forEach((button) => {
 	button.addEventListener('click', () => {
 		const pId = button.dataset.productId;
@@ -74,24 +97,9 @@ document.querySelectorAll('.adding').forEach((button) => {
 			});
 		}
 
-		document.querySelector(`.added-${pId}`).classList.add('added-msg');
-		setTimeout(() => {
-			const prevTout = msgTimeouts[pId];
-			if (prevTout) clearTimeout(prevTout);
-				  
-			const timeoutId = setTimeout(() => {
-				document.querySelector(`.added-${pId}`).classList.remove('added-msg');
-			}, 2000);
-	  
-			msgTimeouts[pId] = timeoutId;
-		});
-		
-		let cartQuantity = 0;
-		cart.forEach((product) => {
-			cartQuantity += product.quantity;
-		});
+		addedMessage(pId);
+		cartUpdate();
 
-		document.querySelector('.cart-quantity').innerHTML = cartQuantity;
 		console.clear();
 		console.log(cart);
 	});
