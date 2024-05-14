@@ -1,4 +1,5 @@
-export let cart = [{
+export let cart = JSON.parse(localStorage.getItem('cart')) || 
+[{
 	id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
 	quantity: 2
 }, {
@@ -6,6 +7,9 @@ export let cart = [{
 	quantity: 1
 }];
 
+function storeCart(){
+	localStorage.setItem('cart', JSON.stringify(cart));
+}
 export function cartUpdate(elem){
 	const quan = +(document.querySelector(`.chosen-quantity-${elem.productId}`).value);
 	const toFind = cart.find(prop => prop.id === elem.productId);
@@ -17,17 +21,12 @@ export function cartUpdate(elem){
 			quantity: quan
 		});
 	}
-	
-	let cartQuantity = 0;
-	cart.forEach((product) => {
-		cartQuantity += product.quantity;
-	});
-	document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+	storeCart();
 }
 
 export function deleteItem(prodId){
 	const index = cart.findIndex(obj => obj.id === prodId)
 	if(index >= 0)
 		cart.splice(index, 1);
-	console.log(cart);
+	storeCart();
 }

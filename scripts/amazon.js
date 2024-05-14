@@ -1,7 +1,8 @@
 import {cart, cartUpdate} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { rounding } from './utils.js';
 
-let productsHTML = '';
+let productsHTML = '', cartQuantity = 0;
 const msgTimeouts = [];
 
 products.forEach((item) => {
@@ -59,6 +60,12 @@ products.forEach((item) => {
 }); 
 document.querySelector('.js-products').innerHTML = productsHTML;
 
+cart.forEach((product) => {
+	cartQuantity += product.quantity;
+});
+if(cartQuantity)
+	document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+
 function addedMessage(pId){
   	document.querySelector(`.added-${pId}`).classList.add('added-msg');
 	setTimeout(() => {
@@ -78,7 +85,5 @@ document.querySelectorAll('.adding').forEach((button) => {
     	
 		addedMessage(buttonElement.productId);
 		cartUpdate(buttonElement);		
-/*		console.clear();
-		console.log(cart);*/
 	});
 });
