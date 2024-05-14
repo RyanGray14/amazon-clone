@@ -78,8 +78,7 @@ document.querySelectorAll('.adding').forEach((button) => {
     	
 		addedMessage(buttonElement.productId);
 		cartUpdate(buttonElement);		
-
-		console.clear();
-		console.log(cart);
+/*		console.clear();
+		console.log(cart);*/
 	});
 });
