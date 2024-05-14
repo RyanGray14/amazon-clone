@@ -60,11 +60,13 @@ products.forEach((item) => {
 }); 
 document.querySelector('.js-products').innerHTML = productsHTML;
 
-cart.forEach((product) => {
-	cartQuantity += product.quantity;
-});
-if(cartQuantity)
-	document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+function updateQuan(){
+	cart.forEach((product) => {
+		cartQuantity += product.quantity;
+	});
+	if(cartQuantity)
+		document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+} updateQuan();
 
 function addedMessage(pId){
   	document.querySelector(`.added-${pId}`).classList.add('added-msg');
@@ -82,8 +84,9 @@ function addedMessage(pId){
 document.querySelectorAll('.adding').forEach((button) => {
 	button.addEventListener('click', () => {
 		const buttonElement = button.dataset;
-    	
+		cartQuantity = 0;
 		addedMessage(buttonElement.productId);
 		cartUpdate(buttonElement);		
+		updateQuan();
 	});
 });
