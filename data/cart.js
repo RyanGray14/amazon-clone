@@ -10,6 +10,7 @@ export let cart = JSON.parse(localStorage.getItem('cart')) ||
 function storeCart(){
 	localStorage.setItem('cart', JSON.stringify(cart));
 }
+
 export function cartUpdate(elem){
 	const quan = +(document.querySelector(`.chosen-quantity-${elem.productId}`).value);
 	const toFind = cart.find(prop => prop.id === elem.productId);
@@ -18,7 +19,8 @@ export function cartUpdate(elem){
 	else {
 		cart.push({
 			id: elem.productId,
-			quantity: quan
+			quantity: quan, 
+			deliveryOptionsId: '1'
 		});
 	}
 	storeCart();
@@ -29,4 +31,11 @@ export function deleteItem(prodId){
 	if(index >= 0)
 		cart.splice(index, 1);
 	storeCart();
+}
+
+export function updateIndvQuantity(id){
+	const item = cart.find(item => item.id === id);
+	item.quantity = +(document.querySelector(`.js-update-input-${id}`).value);
+	document.querySelector(`.js-quantity-label-${id}`).innerHTML = item.quantity;
+	//console.log(item);
 }

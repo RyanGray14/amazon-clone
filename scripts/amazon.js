@@ -2,7 +2,8 @@ import {cart, cartUpdate} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { rounding } from './utils.js';
 
-let productsHTML = '', cartQuantity = 0;
+let productsHTML = '';
+let cartQuantity = 0;
 const msgTimeouts = [];
 
 products.forEach((item) => {
