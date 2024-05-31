@@ -1,7 +1,7 @@
 import { cart, deleteItem, updateIndvQuantity, updateDeliveryOption } from "../../data/cart.js";
 import { updateQuantity } from "../checkout.js";
 import { products } from "../../data/products.js";
-import { rounding } from "../utils.js";
+import { getProduct, rounding } from "../utils.js";
 import { deliveryOptions } from "../../data/delivery.js";
 import { renderPaymentSummary } from "./PaymentSummary.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
@@ -9,8 +9,8 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 export function renderOrderSummary() {
     let cartHTML = '';
     cart.forEach((cartItem) => {
-        const matchingItem = products.find(item => item.id === cartItem.id);		
-       const date = dayjs().add(deliveryOptions.find(option => option.id ===  cartItem.deliveryOptionId).time, 'days').format('dddd, MMMM D');
+        const matchingItem = getProduct(products, cartItem.id);		
+       const date = dayjs().add(getProduct(deliveryOptions, cartItem.deliveryOptionId).time, 'days').format('dddd, MMMM D');
         cartHTML += `
         <div class="cart-item-container js-container-${matchingItem.id}">
             <div class="delivery-date js-delivery">

@@ -1,4 +1,3 @@
-//import { cart, deleteItem, updateIndvQuantity, updateDeliveryOption } from "../data/cart.js";
 import { rounding } from "../utils.js";
 import { updateQuantity, price, shipping } from "../checkout.js";
 

@@ -1,3 +1,5 @@
+import { getProduct } from "../scripts/utils.js";
+
 export let cart = JSON.parse(localStorage.getItem('cart')) || 
 [{
 	id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -13,7 +15,7 @@ export function storeCart(){
 
 export function cartUpdate(elem){
 	const quan = +(document.querySelector(`.chosen-quantity-${elem.productId}`).value);
-	const toFind = cart.find(prop => prop.id === elem.productId);
+	const toFind = getProduct(cart, elem.productId);
 	if(toFind)
 		toFind.quantity += quan;
 	else {
@@ -34,7 +36,7 @@ export function deleteItem(prodId){
 }
 
 export function updateIndvQuantity(id){
-	const item = cart.find(item => item.id === id);
+	const item = getProduct(cart, id);
 	item.quantity = +(document.querySelector(`.js-update-input-${id}`).value);
 	document.querySelector(`.js-quantity-label-${id}`).innerHTML = item.quantity;
 	storeCart();
@@ -42,7 +44,7 @@ export function updateIndvQuantity(id){
 }
 
 export function updateDeliveryOption(pId, delOptionId){
-	const matchingItem = cart.find(item => item.id === pId);
+	const matchingItem = getProduct(cart, pId);
 	matchingItem.deliveryOptionId = delOptionId;
 	storeCart();
 }
