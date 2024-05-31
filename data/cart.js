@@ -7,7 +7,7 @@ export let cart = JSON.parse(localStorage.getItem('cart')) ||
 	quantity: 1
 }];
 
-function storeCart(){
+export function storeCart(){
 	localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -20,7 +20,7 @@ export function cartUpdate(elem){
 		cart.push({
 			id: elem.productId,
 			quantity: quan, 
-			deliveryOptionsId: '1'
+			deliveryOptionId: '1'
 		});
 	}
 	storeCart();
@@ -37,5 +37,12 @@ export function updateIndvQuantity(id){
 	const item = cart.find(item => item.id === id);
 	item.quantity = +(document.querySelector(`.js-update-input-${id}`).value);
 	document.querySelector(`.js-quantity-label-${id}`).innerHTML = item.quantity;
+	storeCart();
 	//console.log(item);
+}
+
+export function updateDeliveryOption(pId, delOptionId){
+	const matchingItem = cart.find(item => item.id === pId);
+	matchingItem.deliveryOptionId = delOptionId;
+	storeCart();
 }
