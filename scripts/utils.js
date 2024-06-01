@@ -1,5 +1,5 @@
 export function rounding(cents){
-    return (cents/100).toFixed(2);
+    return (Math.round(cents)/100).toFixed(2);
 }
 
 export function getProduct(arr, id){

@@ -2,7 +2,7 @@ import { cart, deleteItem, updateIndvQuantity, updateDeliveryOption } from "../.
 import { updateQuantity } from "../checkout.js";
 import { products } from "../../data/products.js";
 import { getProduct, rounding } from "../utils.js";
-import { deliveryOptions } from "../../data/delivery.js";
+import { deliveryOptions, getDate } from "../../data/delivery.js";
 import { renderPaymentSummary } from "./PaymentSummary.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
@@ -10,7 +10,7 @@ export function renderOrderSummary() {
     let cartHTML = '';
     cart.forEach((cartItem) => {
         const matchingItem = getProduct(products, cartItem.id);		
-       const date = dayjs().add(getProduct(deliveryOptions, cartItem.deliveryOptionId).time, 'days').format('dddd, MMMM D');
+       const date = getDate(getProduct(deliveryOptions, cartItem.deliveryOptionId));
         cartHTML += `
         <div class="cart-item-container js-container-${matchingItem.id}">
             <div class="delivery-date js-delivery">
@@ -64,7 +64,7 @@ export function renderOrderSummary() {
     function deliveryHtml(Item) {
         let delHtml = '';
         deliveryOptions.forEach((option) => {
-            const deliveryDate = dayjs().add(option.time, 'days').format('dddd, MMMM D' );
+            const deliveryDate = getDate(option);
             const price = (option.priceCents) ? `$${option.priceCents / 100} -`: 'FREE';
             const isChecked = option.id === Item.deliveryOptionId;
             delHtml += `<div class="delivery-option js-delivery-options"
