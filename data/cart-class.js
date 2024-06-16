@@ -1,14 +1,15 @@
 import { getProduct } from "../scripts/utils.js";
 class Cart{
-    cartItems; key; 
+    cartItems;
+    #key; 
 
     constructor(key){
-        this.key = key;
-        this.loadFromStorage();
+        this.#key = key;
+        this.#loadFromStorage();
     }
 
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.key)) || 
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#key)) || 
         [{
             id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
             quantity: 2, 
@@ -21,7 +22,7 @@ class Cart{
     }
     
     storeCart() {
-        localStorage.setItem(this.key, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#key, JSON.stringify(this.cartItems));
     }
 
     cartUpdate(elemId, quan) {
