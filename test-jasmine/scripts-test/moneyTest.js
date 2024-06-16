@@ -1,4 +1,4 @@
-import { rounding } from "../scripts/utils.js";
+import { rounding } from "../../scripts/utils.js";
 
 describe('test suite: formatCurrency', () => {
     it('converts cents to dollars', () => {

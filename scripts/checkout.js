@@ -1,4 +1,5 @@
-import { cart,} from "../data/cart.js";
+import { cart } from "../data/cart.js";
+import '../data/cart-oop.js';
 import { products } from "../data/products.js";
 import { deliveryOptions } from "../data/delivery.js";
 import { renderOrderSummary } from "./checkout/OrderSummary.js";

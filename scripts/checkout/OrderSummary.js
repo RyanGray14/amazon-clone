@@ -4,13 +4,12 @@ import { products } from "../../data/products.js";
 import { getProduct, rounding } from "../utils.js";
 import { deliveryOptions, getDate } from "../../data/delivery.js";
 import { renderPaymentSummary } from "./PaymentSummary.js";
-import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 export function renderOrderSummary() {
     let cartHTML = '';
     cart.forEach((cartItem) => {
         const matchingItem = getProduct(products, cartItem.id);		
-       const date = getDate(getProduct(deliveryOptions, cartItem.deliveryOptionId));
+        const date = getDate(getProduct(deliveryOptions, cartItem.deliveryOptionId));
         cartHTML += `
         <div class="cart-item-container js-container-${matchingItem.id}">
             <div class="delivery-date js-delivery">

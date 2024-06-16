@@ -87,7 +87,8 @@ document.querySelectorAll('.adding').forEach((button) => {
 	button.addEventListener('click', () => {
 		const buttonElement = button.dataset;
 		addedMessage(buttonElement.productId);
-		cartUpdate(buttonElement);		
+		const quan = +(document.querySelector(`.chosen-quantity-${buttonElement.productId}`).value);
+		cartUpdate(buttonElement.productId, quan);		
 		updateQuan();
 	});
 });
