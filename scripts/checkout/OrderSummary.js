@@ -9,8 +9,7 @@ import { renderPaymentSummary } from "./PaymentSummary.js";
 export function renderOrderSummary() {
     let cartHTML = '';
     cart.forEach((cartItem) => {
-        const matchingItem = getProduct(products, cartItem.id);		
-        //console.log(matchingItem);
+        const matchingItem = getProduct(products, cartItem.id);	
         const date = getDate(getProduct(deliveryOptions, cartItem.deliveryOptionId));
         cartHTML += `
         <div class="cart-item-container js-container-${matchingItem.id}">

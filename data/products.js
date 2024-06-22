@@ -645,8 +645,3 @@ export const products = [
 ].map((productDetails) => {
 	return new Product(productDetails);
 });
-
-//console.log(products);
-
-/*const product1 = new Product(products[0]);
-console.log(product1); */
