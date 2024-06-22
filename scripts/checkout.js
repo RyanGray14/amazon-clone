@@ -1,5 +1,5 @@
 import { cart } from "../data/cart.js";
-import '../data/cart-class.js';
+//import '../data/cart-class.js';
 import { products } from "../data/products.js";
 import { deliveryOptions } from "../data/delivery.js";
 import { renderOrderSummary } from "./checkout/OrderSummary.js";

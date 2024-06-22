@@ -1,6 +1,6 @@
 import {cart, cartUpdate} from '../data/cart.js';
 import {products} from '../data/products.js';
-import { rounding } from './utils.js';
+//import { rounding } from './utils.js';
 
 let productsHTML = '';
 const msgTimeouts = [];
@@ -19,14 +19,14 @@ products.forEach((item) => {
 
 		<div class="product-rating-container">
 			<img class="product-rating-stars"
-			src="images/ratings/rating-${item.rating.stars * 10}.png">
+			src = "${item.getStars()}">
 			<div class="product-rating-count link-primary">
 			${item.rating.count}
 			</div>
 		</div>
 
 		<div class="product-price">
-		$${rounding(item.priceCents)}
+		${item.getPrice()}
 		</div>
 
 		<div class="product-quantity-container">

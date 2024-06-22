@@ -4,11 +4,13 @@ import { products } from "../../data/products.js";
 import { getProduct, rounding } from "../utils.js";
 import { deliveryOptions, getDate } from "../../data/delivery.js";
 import { renderPaymentSummary } from "./PaymentSummary.js";
+//import '../../data/cart-class.js';
 
 export function renderOrderSummary() {
     let cartHTML = '';
     cart.forEach((cartItem) => {
         const matchingItem = getProduct(products, cartItem.id);		
+        //console.log(matchingItem);
         const date = getDate(getProduct(deliveryOptions, cartItem.deliveryOptionId));
         cartHTML += `
         <div class="cart-item-container js-container-${matchingItem.id}">
@@ -25,7 +27,7 @@ export function renderOrderSummary() {
                         ${matchingItem.name}
                     </div>
                     <div class="product-price">
-                        $${rounding(matchingItem.priceCents)}
+                        ${matchingItem.getPrice()}
                     </div>
                     <div class="product-quantity">
                         <span>
@@ -121,3 +123,4 @@ export function renderOrderSummary() {
         });
     });
 }
+
